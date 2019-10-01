@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
       // log error to database
       console.log(error);
       res.status(500).json({
-        message: 'Error retrieving the hubs',
+        message: 'The posts information could not be retrieved.',
       });
     });
 });
