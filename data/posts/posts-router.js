@@ -84,50 +84,63 @@ router.post('/:id/comments', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  Hubs.remove(req.params.id)
-    .then(count => {
-      if (count > 0) {
-        res.status(200).json({ message: 'The hub has been nuked' });
-      } else {
-        res.status(404).json({ message: 'The hub could not be found' });
-      }
+    const id = req.params.id
+  Hubs.remove(id)
+    .then(post => {
+        if(!post) {
+            res.status(404).json({ message: 'The post with the specified ID does not exist.' });
+          }
+              // send the user back to the client
+              res.json(post); //.json() will set the right headers and convert to JSON
     })
     .catch(error => {
       // log error to database
       console.log(error);
       res.status(500).json({
-        message: 'Error removing the hub',
+        message: 'The post could not be removed',
       });
     });
 });
 
 router.put('/:id', (req, res) => {
   const changes = req.body;
-  Hubs.update(req.params.id, changes)
-    .then(hub => {
-      if (hub) {
-        res.status(200).json(hub);
-      } else {
-        res.status(404).json({ message: 'The hub could not be found' });
-      }
+  const id = req.params.id
+  if  (!changes.title || !changes.content) {
+    res.status(400).json({ errorMessage: 'Please provide title and content for the user.' });
+  }
+  else {
+  Posts.update(id , changes)
+    .then(post => {
+        if(!post) {
+            res.status(404).json({ message: 'The post with the specified ID does not exist.' });
+          }
+        
+              res.status(200);
+              res.json(post); //.json() will set the right headers and convert to JSON
     })
     .catch(error => {
       // log error to database
       console.log(error);
       res.status(500).json({
-        message: 'Error updating the hub',
+        message: 'The post information could not be modified.',
       });
     });
+}
 });
 
 // add an endpoint that returns all the messages for a hub
-router.get('/:id/messages', (req, res) => {
-  Hubs.findHubMessages(req.params.id)
-    .then(messages => {
-      res.status(200).json(messages);
+router.get('/:id/comments', (req, res) => {
+    const id = req.params.id;
+  Posts.findCommentsById(id)
+    .then(comment => {
+        if(!comment) {
+            res.status(404).json({ message: 'The comment with the specified ID does not exist.' });
+          } 
+              res.send(comment);
+            
     })
     .catch(error => {
-      res.status(500).json({ message: 'error getting messages' });
+      res.status(500).json({ message: 'error getting comment' });
     });
 });
 
