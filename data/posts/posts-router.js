@@ -19,14 +19,14 @@ router.get('/', (req, res) => {
     });
 });
 
-// the same as /api/hubs/:id
+// the same as /api/posts/:id
 router.get('/:id', (req, res) => {
-  Hubs.findById(req.params.id)
-    .then(hub => {
-      if (hub) {
-        res.status(200).json(hub);
+  Posts.findById(req.params.id)
+    .then(post => {
+      if (post) {
+        res.status(200).json(post);
       } else {
-        res.status(404).json({ message: 'Hub not found' });
+        res.status(404).json({ message: 'Post not found' });
       }
     })
     .catch(error => {
@@ -40,17 +40,23 @@ router.get('/:id', (req, res) => {
 
 // the same as /api/hubs/
 router.post('/', (req, res) => {
-  Hubs.add(req.body)
-    .then(hub => {
-      res.status(201).json(hub);
+    const userPosts = req.body
+ // NEVER TRUST THE CLIENT!!!!!
+ if (!userPosts.title || !userPosts.contents) {
+    res.status(400).json({ errorMessage: 'Please provide title and contents for the post.' });
+  } else {
+      Posts.insert(userPosts)
+    .then(post => {
+      res.status(201).json(post);
     })
     .catch(error => {
       // log error to database
       console.log(error);
       res.status(500).json({
-        message: 'Error adding the hub',
+        error: 'There was an error while saving the post to the database',
       });
     });
+}
 });
 
 router.delete('/:id', (req, res) => {
