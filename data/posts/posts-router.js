@@ -21,24 +21,25 @@ router.get('/', (req, res) => {
 
 // the same as /api/posts/:id
 router.get('/:id', (req, res) => {
-  Posts.findById(req.params.id)
+ const id = req.params.id;
+ Posts.findById(id)
     .then(post => {
       if (post) {
         res.status(200).json(post);
       } else {
-        res.status(404).json({ message: 'Post not found' });
+        res.status(404).json({ message: 'The post with the specified ID does not exist.' });
       }
     })
     .catch(error => {
       // log error to database
       console.log(error);
       res.status(500).json({
-        message: 'Error retrieving the hub',
+        error: '"The comments information could not be retrieved."',
       });
     });
 });
 
-// the same as /api/hubs/
+// the same as /api/posts/
 router.post('/', (req, res) => {
     const userPosts = req.body
  // NEVER TRUST THE CLIENT!!!!!
