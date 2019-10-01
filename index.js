@@ -1,10 +1,10 @@
 const express = require('express');
-
+const cors = require('cors')
 const postsRouter = require('./data/posts/posts-router');
 // const apiRouter = require('./api/api-router.js')
 
 const server = express();
-
+server.use(cors());
 server.use(express.json());
 
 // server.use('/api', apiRouter);
@@ -16,6 +16,7 @@ server.get('/', (req, res) => {
     <p>Welcome to the Lambda Posts API</p>
   `);
 });
+
 
 // add an endpoint for adding new message to posts
 

@@ -1,0 +1,111 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #7c9ad4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+input {
+  width: 120px;
+}
+.button-row {
+display: flex;
+justify-content: space-between;
+padding: 0 50px 20px 41px;
+}
+button {
+  width: 80px;
+
+   border: none;
+   background-color: rgb(175, 81, 18);
+   color: white;
+   padding: 3px 8px;
+   margin-top: 25px;
+ }
+ form > input {
+  background-color: #d1d1c9;
+  border: 0;
+  padding: 6px 0;
+  font-size: 1rem;
+  width: 200px;
+  outline: 0;
+  color: rgb(11, 8, 32);
+  border-bottom: 1px solid #2a2b15;
+  margin-right: 8px;
+}
+.list {
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.39), 0 3px 6px rgba(207, 206, 206, 0.23);
+}
+
+.hobbit-container {
+  margin-top: 30px;
+ display: flex;
+ flex-direction: column;
+ justify-content: top;
+ align-content: center;
+ border-radius: 5px;
+
+  height: 250px;
+  width: 420px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  
+  }
+
+  li {
+    cursor: pointer;
+    padding: 6px 0;
+    display: flex;
+     margin: 0 15px;
+    align-items: center;
+    
+  }
+ul {
+  list-style: none;
+  align-items: start;
+  width:100%;
+  display: flex;
+ flex-direction: column;
+}
+form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  
+}
+ 
+
+  label {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 36px 4px 40px;
+  }
+
+ legend {
+    padding-left: 40px;
+    font-weight: bold;
+    color: rgb(180, 81, 35);
+    text-align: start;
+    margin-bottom: 18px;
+    margin-top: -10px;
+  }
+
+  input {
+    width: 120px;
+  }
+

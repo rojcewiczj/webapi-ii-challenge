@@ -1,12 +1,12 @@
 const express = require('express');
 
-const Posts = require('../db.js');
+const Posts = require('../db');
 
 const router = express.Router();
 
 // any url that begins with /api/posts
 router.get('/', (req, res) => {
-  posts.find(req.query)
+  Posts.find(req.query)
     .then(posts => {
       res.status(200).json(posts);
     })
@@ -85,7 +85,7 @@ router.post('/:id/comments', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const id = req.params.id
-  Hubs.remove(id)
+  Posts.remove(id)
     .then(post => {
         if(!post) {
             res.status(404).json({ message: 'The post with the specified ID does not exist.' });
@@ -131,7 +131,7 @@ router.put('/:id', (req, res) => {
 // add an endpoint that returns all the messages for a hub
 router.get('/:id/comments', (req, res) => {
     const id = req.params.id;
-  Posts.findCommentsById(id)
+  Posts.findCommentById(id)
     .then(comment => {
         if(!comment) {
             res.status(404).json({ message: 'The comment with the specified ID does not exist.' });
